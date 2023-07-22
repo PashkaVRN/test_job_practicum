@@ -24,6 +24,9 @@ def send_welcome(message):
         telebot.types.KeyboardButton(text='Мое последнее селфи'),
         telebot.types.KeyboardButton(text='Мое студенческое фото'),
         telebot.types.KeyboardButton(text='Мое увлечение'),
+        telebot.types.KeyboardButton(text='Расскажи про gpt'),
+        telebot.types.KeyboardButton(text='Расскажи о SQL и noSQL'),
+        telebot.types.KeyboardButton(text='Расскажи историю любви'),
         telebot.types.KeyboardButton(text='Исходный код бота')
     ]
     keyboard.add(*buttons)
@@ -31,20 +34,22 @@ def send_welcome(message):
     bot.reply_to(
         message,
         'Привет!\n '
-        'Бот умеет распознавать некоторые текстовые команды.\n '
-        'Использование нижнего и верхнего регистра поддерживается:\n '
+        'Бот умеет распознавать текстовые команды, так же как и нажатия кнопок\n '
+        'Использование нижнего и верхнего регистра символов поддерживается:\n '
+        'В ответ на эти команды бот пришлет аудиофайл:\n '
         '- Расскажи про GPT\n '
         '- Расскажи о SQL и noSQL\n '
         '- Расскажи историю любви\n '
-        ' В ответ на эти команды бот пришлет аудиофайл.\n '
-        'Бот поддерживает выдачу информации по кнопкам.\n '
+        'Если пропадает меню выбора кнопок, нажмите на символ 4 точек в нижнем правом углу.\n '
+        'Если возникнут вопросы пишите мне в телеграм: @pashkavrn\n '
         'Хорошего дня :)',
         reply_markup=keyboard)
 
 
-@bot.message_handler(func=lambda message: message.text == 'Мое последнее селфи')
+@bot.message_handler(func=lambda message: message.text.lower() == 'мое последнее селфи')
 def send_selfie(message):
     """Метод отправки моего последнего селфи при нажатии на кнпоку в боте."""
+
     logging.info('Запрос на отправку селфи')
     selfie_dir = os.path.join(
         os.path.dirname(os.path.abspath(__file__)), 'my_selfi')
@@ -56,9 +61,10 @@ def send_selfie(message):
             logging.info('Селфи отправлено')
 
 
-@bot.message_handler(func=lambda message: message.text == 'Мое студенческое фото')
+@bot.message_handler(func=lambda message: message.text.lower() == 'мое студенческое фото')
 def send_college_photo(message):
     """Метод отправки моих студенческих фотографий. """
+
     logging.info('Запрос на отправку студенческого фото.')
     post_text = (
         'К сожалению, у меня не остальнось фотографий из школы, '
@@ -75,9 +81,10 @@ def send_college_photo(message):
             logging.info('Студенческое фото отправлено.')
 
 
-@bot.message_handler(func=lambda message: message.text == 'Мое увлечение')
+@bot.message_handler(func=lambda message: message.text.lower() == 'мое увлечение')
 def send_hobby(message):
     """Метод отправки поста и фотографий о моем увлечении. """
+
     logging.info('Запрос на отправку поста о моем увлечении.')
     post_text = (
         'Привет! Меня зовут Павел и я увлекаюсь альпинизмом '
@@ -100,7 +107,7 @@ def send_hobby(message):
             logging.info('Пост о моем увлечении отправлен')
 
 
-@bot.message_handler(func=lambda message: message.text.lower() == 'Расскажи про GPT')
+@bot.message_handler(func=lambda message: message.text.lower() == 'расскажи про gpt')
 def send_audio_gpt(message):
     """Метод для отправки аудиофайла о GPT. """
 
@@ -110,7 +117,7 @@ def send_audio_gpt(message):
     logging.info('Аудиофайл о GPT отправлен.')
 
 
-@bot.message_handler(func=lambda message: message.text.lower() == 'Расскажи о SQL и noSQL')
+@bot.message_handler(func=lambda message: message.text.lower() == 'расскажи о sql и nosql')
 def send_audio_sql_nosql(message):
     """Метод для отправки аудиофайла о SQL и noSQL. """
 
@@ -120,7 +127,7 @@ def send_audio_sql_nosql(message):
     logging.info('Аудиофайл о SQL отправлен')
 
 
-@bot.message_handler(func=lambda message: message.text.lower() == 'Расскажи историю любви')
+@bot.message_handler(func=lambda message: message.text.lower() == 'расскажи историю любви')
 def send_audio_love(message):
     """Метод для отправки аудиофайла о истории любви. """
 
@@ -130,7 +137,7 @@ def send_audio_love(message):
     logging.info('Аудиофайл о истории любви отправлен.')
 
 
-@bot.message_handler(func=lambda message: message.text == 'Исходный код бота')
+@bot.message_handler(func=lambda message: message.text.lower() == 'исходный код бота')
 def send_source_code(message):
     """Метод отправляющий ссылку на исходный код бота."""
 
