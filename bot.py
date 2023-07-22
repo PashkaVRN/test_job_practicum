@@ -135,7 +135,7 @@ def send_source_code(message):
     """Метод отправляющий ссылку на исходный код бота."""
 
     logging.info('Запрос на оптравку исходного кода бота.')
-    bot.send_message(message.chat.id, 'Ссылка на исходный код бота: https://github.com/YOUR_USERNAME/YOUR_REPOSITORY')
+    bot.send_message(message.chat.id, 'Ссылка на исходный код бота: https://github.com/PashkaVRN/test_job_practicum')
     logging.info('Исходный код бота отправлен.')
 
 
