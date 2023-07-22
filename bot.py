@@ -19,7 +19,7 @@ bot = telebot.TeleBot(TOKEN)
 def send_welcome(message):
     """Кнопки внутри бота. """
 
-    keyboard = telebot.types.ReplyKeyboardMarkup(row_width=2)
+    keyboard = telebot.types.ReplyKeyboardMarkup(row_width=3)
     buttons = [
         telebot.types.KeyboardButton(text='Мое последнее селфи'),
         telebot.types.KeyboardButton(text='Мое студенческое фото'),
